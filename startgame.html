@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Start Game - Aetheria</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url("https://img.freepik.com/premium-photo/metaverse-world-sandbox-world-metaverse-virtual-world-avatar-vr-camera-virtual-world-city-people-3d-illustration_974729-98561.jpg");
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            text-align: center;
+            padding: 40px;
+            border-radius: 100px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 600px;
+            background-color: #ec23b38a;
+            backdrop-filter: blur(5px);
+            border-color: #ccc;
+        }
+        h1 {
+            color: white;
+            margin-bottom: 20px;
+        }
+        input {
+            padding: 10px;
+            margin-bottom: 15px;
+            width: calc(100% - 20px);
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        button {
+            padding: 15px 30px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Start Game</h1>
+
+        <!-- Form for game settings and player information -->
+        <form>
+            <label for="playerName">Player Name:</label><br>
+            <input type="text" id="playerName" name="playerName" required><br>
+            
+            <label for="difficulty">Select Difficulty:</label><br>
+            <select id="difficulty" name="difficulty">
+                <option value="easy">Easy</option>
+                <option value="medium">Medium</option>
+                <option value="hard">Hard</option>
+            </select><br>
+
+            <label for="gameMode">Select Game Mode:</label><br>
+            <select id="gameMode" name="gameMode">
+                <option value="singleplayer">Single Player</option>
+                <option value="multiplayer">Multiplayer</option>
+            </select><br><br>
+
+            <!-- Button to start the game -->
+            <button type="submit">Start Game</button>
+        </form>
+    </div>
+
+</body>
+</html>

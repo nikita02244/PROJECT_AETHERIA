@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virtual Estate Gaming - Community</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: #1a1a2e;
+            color: #fff;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Navigation */
+        nav {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px 0;
+            margin-bottom: 30px;
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #6c63ff;
+        }
+
+        /* Main Grid Layout */
+        .grid-container {
+            display: grid;
+            grid-template-columns: 250px 1fr 300px;
+            gap: 20px;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+        }
+
+        .sidebar h3 {
+            margin-bottom: 15px;
+            color: #6c63ff;
+        }
+
+        .category-list {
+            list-style: none;
+        }
+
+        .category-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .category-list li:hover {
+            color: #6c63ff;
+        }
+
+        /* Main Content */
+        .main-content {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+        }
+
+        .post-form {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .post-form textarea {
+            width: 100%;
+            height: 100px;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            border-radius: 5px;
+            padding: 10px;
+            color: #fff;
+            margin-bottom: 10px;
+            resize: none;
+        }
+
+        .post-form button {
+            background: #6c63ff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .post-form button:hover {
+            background: #5650d8;
+        }
+
+        .post {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .post-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .post-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #6c63ff;
+            margin-right: 10px;
+        }
+
+        .post-info h4 {
+            color: #fff;
+        }
+
+        .post-info span {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9em;
+        }
+
+        .post-content {
+            margin-bottom: 15px;
+        }
+
+        .post-actions {
+            display: flex;
+            gap: 20px;
+        }
+
+        .post-actions button {
+            background: none;
+            border: none;
+            color: rgba(255, 255, 255, 0.6);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .post-actions button:hover {
+            color: #6c63ff;
+        }
+
+        /* Right Sidebar */
+        .trending {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+        }
+
+        .trending h3 {
+            margin-bottom: 15px;
+            color: #6c63ff;
+        }
+
+        .trending-item {
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .trending-item h4 {
+            margin-bottom: 5px;
+        }
+
+        .trending-item p {
+            font-size: 0.9em;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .grid-container {
+                grid-template-columns: 200px 1fr;
+            }
+            .trending {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .grid-container {
+                grid-template-columns: 1fr;
+            }
+            .sidebar {
+                display: none;
+            }
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="container">
+            <div class="nav-content">
+                <h1>Virtual Estate Community</h1>
+                <div class="nav-links">
+                    <a href="welcome.html">Home</a>
+                    <a href="marketplace.html">Marketplace</a>
+                    <a href="profile.html">Profile</a>
+                    <a href="#">Settings</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="grid-container">
+            <!-- Left Sidebar -->
+            <div class="sidebar">
+                <h3>Categories</h3>
+                <ul class="category-list">
+                    <li>🏠 Virtual Properties</li>
+                    <li>🎮 Gaming Discussion</li>
+                    <li>💡 Tips & Tricks</li>
+                    <li>📢 Announcements</li>
+                    <li>🤝 Partnerships</li>
+                    <li>❓ Help & Support</li>
+                </ul>
+            </div>
+
+            <!-- Main Content -->
+            <div class="main-content">
+                <div class="post-form">
+                    <textarea placeholder="Share your thoughts or showcase your virtual property..."></textarea>
+                    <button onclick="createPost()">Post</button>
+                </div>
+                <div id="posts-container">
+                    <!-- Posts will be dynamically added here -->
+                </div>
+            </div>
+
+            <!-- Right Sidebar -->
+            <div class="trending">
+                <h3>Trending Properties</h3>
+                <div class="trending-item">
+                    <h4>Cyber District Mansion</h4>
+                    <p>Value: 1500 ETH</p>
+                </div>
+                <div class="trending-item">
+                    <h4>Virtual Gaming Arena</h4>
+                    <p>Value: 800 ETH</p>
+                </div>
+                <div class="trending-item">
+                    <h4>Digital Art Gallery</h4>
+                    <p>Value: 2000 ETH</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Sample data for posts
+        const samplePosts = [
+            {
+                id: 1,
+                author: 'CryptoGamer',
+                time: '2 hours ago',
+                content: 'Just acquired a prime virtual property in the Cyber District! Looking for creative ideas on how to develop it. Any suggestions? 🏗',
+                likes: 24,
+                comments: 8
+            },
+            {
+                id: 2,
+                author: 'VirtualArchitect',
+                time: '4 hours ago',
+                content: 'Hosting an open house event in my virtual mansion tomorrow at 8PM EST. Everyone's welcome! Features include: gaming arena, art gallery, and rooftop party space. 🎉',
+                likes: 45,
+                comments: 12
+            }
+        ];
+
+        // Function to create post HTML
+        function createPostElement(post) {
+            return `
+                <div class="post">
+                    <div class="post-header">
+                        <div class="post-avatar"></div>
+                        <div class="post-info">
+                            <h4>${post.author}</h4>
+                            <span>${post.time}</span>
+                        </div>
+                    </div>
+                    <div class="post-content">
+                        <p>${post.content}</p>
+                    </div>
+                    <div class="post-actions">
+                        <button onclick="likePost(${post.id})">
+                            <i class="fas fa-heart"></i>
+                            <span>${post.likes}</span>
+                        </button>
+                        <button onclick="commentPost(${post.id})">
+                            <i class="fas fa-comment"></i>
+                            <span>${post.comments}</span>
+                        </button>
+                        <button onclick="sharePost(${post.id})">
+                            <i class="fas fa-share"></i>
+                            <span>Share</span>
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Function to render all posts
+        function renderPosts() {
+            const postsContainer = document.getElementById('posts-container');
+            postsContainer.innerHTML = samplePosts.map(post => createPostElement(post)).join('');
+        }
+
+        // Function to create a new post
+        function createPost() {
+            const textarea = document.querySelector('.post-form textarea');
+            const content = textarea.value.trim();
+
+            if (content) {
+                const newPost = {
+                    id: samplePosts.length + 1,
+                    author: 'CurrentUser',
+                    time: 'Just now',
+                    content: content,
+                    likes: 0,
+                    comments: 0
+                };
+
+                samplePosts.unshift(newPost);
+                renderPosts();
+                textarea.value = '';
+            }
+        }
+
+        // Post interaction functions
+        function likePost(postId) {
+            const post = samplePosts.find(p => p.id === postId);
+            if (post) {
+                post.likes++;
+                renderPosts();
+            }
+        }
+
+        function commentPost(postId) {
+            // Implement comment functionality
+            console.log(Comment on post ${postId});
+        }
+
+        function sharePost(postId) {
+            // Implement share functionality
+            console.log(Share post ${postId});
+        }
+
+        // Initial render
+        renderPosts();
+    </script>
+</body>
+</html>

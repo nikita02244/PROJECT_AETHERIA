@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aetheria Marketplace</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #6C5CE7;
+            --secondary: #FF4ECD;
+            --bg-dark: #0A0B1E;
+            --bg-card: #14152B;
+            --text-primary: #FFFFFF;
+            --text-secondary: #A0A0B8;
+            --gradient: linear-gradient(135deg, var(--primary), var(--secondary));
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-primary);
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 100;
+            background: rgba(10, 11, 30, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-primary);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            transition: 0.3s;
+        }
+
+        .nav-links a.active {
+            background: var(--gradient);
+        }
+
+        .wallet-btn {
+            background: var(--gradient);
+            border: none;
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            color: white;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .wallet-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .marketplace {
+            margin-top: 80px;
+            padding: 2rem 5%;
+        }
+
+        .marketplace-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .search-bar {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 1rem 1rem 1rem 3rem;
+            border-radius: 30px;
+            border: none;
+            background: var(--bg-card);
+            color: var(--text-primary);
+        }
+
+        .search-bar i {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-secondary);
+        }
+
+        .filters {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .filter-group select {
+            padding: 0.5rem 1rem;
+            border-radius: 10px;
+            background: var(--bg-card);
+            border: 1px solid var(--primary);
+            color: var(--text-primary);
+            min-width: 200px;
+        }
+
+        .listings-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .listing-card {
+            background: var(--bg-card);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+
+        .listing-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .listing-image {
+            position: relative;
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .listing-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .listing-badge {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background: var(--gradient);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+
+        .listing-details {
+            padding: 1.5rem;
+        }
+
+        .listing-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .listing-price {
+            color: var(--secondary);
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin: 1rem 0;
+        }
+
+        .listing-stats {
+            display: flex;
+            justify-content: space-between;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .stat {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-secondary);
+        }
+
+        .buy-btn {
+            width: 100%;
+            padding: 0.8rem;
+            background: var(--gradient);
+            border: none;
+            border-radius: 10px;
+            color: white;
+            cursor: pointer;
+            margin-top: 1rem;
+            transition: opacity 0.3s;
+        }
+
+        .buy-btn:hover {
+            opacity: 0.9;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .filters {
+                flex-direction: column;
+            }
+
+            .filter-group select {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">AETHERIA</div>
+        <ul class="nav-links">
+            <li><a href="welcome.html">Home</a></li>
+            <li><a href="#" class="active">Marketplace</a></li>
+            <li><a href="profile.html">Profile</a></li>
+        </ul>
+        <button class="wallet-btn" id="connectWallet">Connect Wallet</button>
+    </nav>
+
+    <main class="marketplace">
+        <div class="marketplace-header">
+            <div class="search-bar">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Search properties, experiences, or collections..." id="searchInput">
+            </div>
+        </div>
+
+        <div class="filters">
+            <div class="filter-group">
+                <label>Property Type</label>
+                <select id="propertyType">
+                    <option value="all">All Types</option>
+                    <option value="land">Virtual Land</option>
+                    <option value="property">Properties</option>
+                    <option value="experience">Experiences</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label>Price Range</label>
+                <select id="priceRange">
+                    <option value="all">All Prices</option>
+                    <option value="0-1000">0 - 1,000 AET</option>
+                    <option value="1000-5000">1,000 - 5,000 AET</option>
+                    <option value="5000+">5,000+ AET</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label>Sort By</label>
+                <select id="sortBy">
+                    <option value="recent">Recently Listed</option>
+                    <option value="price-low">Price: Low to High</option>
+                    <option value="price-high">Price: High to Low</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="listings-grid" id="listingsGrid">
+            <!-- Listings will be dynamically inserted here -->
+        </div>
+    </main>
+
+    <script>
+        // Sample listings data
+        const listings = [
+            {
+                id: 1,
+                title: "Cyber District Penthouse",
+                type: "Virtual Property",
+                price: "5,000 AET",
+                image: "https://via.placeholder.com/400x300",
+                size: "500 sqm",
+                capacity: "50 users"
+            },
+            {
+                id: 2,
+                title: "Gaming Arena",
+                type: "Experience",
+                price: "8,000 AET",
+                image: "https://via.placeholder.com/400x300",
+                size: "1000 sqm",
+                capacity: "200 users"
+            },
+            {
+                id: 3,
+                title: "Premium Land Plot",
+                type: "Virtual Land",
+                price: "3,200 AET",
+                image: "https://via.placeholder.com/400x300",
+                size: "300 sqm",
+                capacity: "Unlimited"
+            },
+            {
+                id: 4,
+                title: "NFT Gallery Space",
+                type: "Virtual Property",
+                price: "4,500 AET",
+                image: "https://via.placeholder.com/400x300",
+                size: "400 sqm",
+                capacity: "100 users"
+            },
+            {
+                id: 5,
+                title: "E-Sports Stadium",
+                type: "Experience",
+                price: "12,000 AET",
+                image: "https://via.placeholder.com/400x300",
+                size: "2000 sqm",
+                capacity: "1000 users"
+            },
+            {
+                id: 6,
+                title: "Downtown Plot",
+                type: "Virtual Land",
+                price: "6,800 AET",
+                image: "https://via.placeholder.com/400x300",
+                size: "800 sqm",
+                capacity: "Unlimited"
+            }
+        ];
+
+        // Function to render listings
+        function renderListings(filteredListings = listings) {
+            const grid = document.getElementById('listingsGrid');
+            grid.innerHTML = filteredListings.map(listing => `
+                <div class="listing-card">
+                    <div class="listing-image">
+                        <img src="${listing.image}" alt="${listing.title}">
+                        <span class="listing-badge">${listing.type}</span>
+                    </div>
+                    <div class="listing-details">
+                        <h3 class="listing-title">${listing.title}</h3>
+                        <div class="listing-price">${listing.price}</div>
+                        <div class="listing-stats">
+                            <span class="stat">
+                                <i class="fas fa-vector-square"></i>
+                                ${listing.size}
+                            </span>
+                            <span class="stat">
+                                <i class="fas fa-users"></i>
+                                ${listing.capacity}
+                            </span>
+                        </div>
+                        <button class="buy-btn" onclick="handlePurchase(${listing.id})">
+                            Buy Now
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Search and filter functionality
+        function applyFilters() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const propertyType = document.getElementById('propertyType').value;
+            const priceRange = document.getElementById('priceRange').value;
+            const sortBy = document.getElementById('sortBy').value;
+
+            let filteredListings = listings.filter(listing => {
+                const matchesSearch = listing.title.toLowerCase().includes(searchTerm) ||
+                                    listing.type.toLowerCase().includes(searchTerm);
+                const matchesType = propertyType === 'all' || listing.type.toLowerCase().includes(propertyType);
+                const price = parseInt(listing.price.replace(/[^0-9]/g, ''));
+                let matchesPrice = true;
+
+                if (priceRange !== 'all') {
+                    if (priceRange === '0-1000') matchesPrice = price <= 1000;
+                    else if (priceRange === '1000-5000') matchesPrice = price > 1000 && price <= 5000;
+                    else if (priceRange === '5000+') matchesPrice = price > 5000;
+                }
+
+                return matchesSearch && matchesType && matchesPrice;
+            });
+
+            // Apply sorting
+            filteredListings.sort((a, b) => {
+                const priceA = parseInt(a.price.replace(/[^0-9]/g, ''));
+                const priceB = parseInt(b.price.replace(/[^0-9]/g, ''));
+                
+                if (sortBy === 'price-low') return priceA - priceB;
+                if (sortBy === 'price-high') return priceB - priceA;
+                return 0; // Default to recent
+            });
+
+            renderListings(filteredListings);
+        }
+
+        // Purchase handler
+        function handlePurchase(listingId) {
+            const wallet = localStorage.getItem('connectedWallet');
+            if (!wallet) {
+                alert('Please connect your wallet first!');
+                return;
+            }
+            alert(Initiating purchase for listing #${listingId});
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            renderListings();
+
+            // Add event listeners
+            document.getElementById('searchInput').addEventListener('input', applyFilters);
+            document.getElementById('propertyType').addEventListener('change', applyFilters);
+            document.getElementById('priceRange').addEventListener('change', applyFilters);
+            document.getElementById('sortBy').addEventListener('change', applyFilters);
+
+            // Wallet connection
+            document.getElementById('connectWallet').addEventListener('click', () => {
+                const wallet = '0x' + Math.random().toString(16).slice(2, 10);
+                localStorage.setItem('connectedWallet', wallet);
+                document.getElementById('connectWallet').textContent = 'Connected';
+                alert(Connected wallet: ${wallet});
+            });
+        });
+    </script>
+</body>
+</html>

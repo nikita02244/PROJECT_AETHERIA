@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connect Wallet - Aetheria</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url("https://t3.ftcdn.net/jpg/04/98/04/58/360_F_498045890_KdYplJs6N6YfGNu0qr9MYwY4jVj4rd5M.jpg");
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            text-align: center;
+            background-color:rgba(255, 255, 255, 0.616);
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 600px;
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        button {
+            padding: 15px 30px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+    <!-- Add Solana Wallet Adapter -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/@solana/web3.js/1.31.0/web3.min.js"></script>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Connect Your Wallet</h1>
+        <p>Please connect your Solana wallet to proceed.</p>
+        <!-- Button to connect wallet -->
+        <button id="connect-button">Connect Wallet</button>
+
+        <!-- Placeholder for wallet address display -->
+        <p id="wallet-status"></p>
+    </div>
+
+    <script>
+        // Phantom wallet detection
+        function isPhantomInstalled() {
+            return window.solana && window.solana.isPhantom;
+        }
+
+        document.getElementById('connect-button').addEventListener('click', async () => {
+            if (isPhantomInstalled()) {
+                try {
+                    // Request wallet connection
+                    const resp = await window.solana.connect();
+                    const walletAddress = resp.publicKey.toString();
+
+                    // Display wallet address
+                    document.getElementById('wallet-status').innerText = "Connected: " + walletAddress;
+
+                    // Optional: Redirect to another page after successful connection
+                    // window.location.href = "play.html";
+
+                } catch (err) {
+                    console.log("User rejected the connection");
+                    document.getElementById('wallet-status').innerText = "Connection failed.";
+                }
+            } else {
+                // If Phantom is not installed
+                document.getElementById('wallet-status').innerText = "Phantom Wallet is not installed.";
+                window.open('https://phantom.app/', '_blank');
+            }
+        });
+    </script>
+
+</body>
+</html>
